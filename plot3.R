@@ -1,0 +1,11 @@
+data <- read.table("household_power_consumption.txt",sep = ';',header=T)
+data$Date <- as.Date(data$Date,format="$d/%m/%Y")
+data <- filter(data, Date > '2007-01-31',Date < '2007-02-03')
+data$Global_active_power <- as.numeric(as.character(data$Global_active_power))
+data$Time <- as.character(data$Time)
+data$DateTime <- as.POSIXlt(paste(data$Date,data$Time),format="%Y/%m/%d %H:%M:%S",tz="EST5EDT")
+png(file='plot2.png',height=480,width=480)
+
+# plot(data$DateTime,data$Global_active_power,type='l',ylab="Global Active Power (kilowatts)",xlab="")
+# hist(data$Global_active_power,breaks=15,main='Global Active Power', col = 'red',ylim = c(0,1200),xlab = 'Global Active Power (kilowatts)')
+dev.off()
